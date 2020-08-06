@@ -20,6 +20,8 @@ import { authSelectors } from '../../state/redux/auth';
 import Login from '../Login';
 
 import Private from '../Route';
+import { I18nPropvider, LOCALES } from '../../i18nProvider';
+import translate from "../../i18nProvider/translate";
 
 /* istanbul ignore next */
 const styles = theme => {
@@ -65,24 +67,27 @@ export class App extends Component {
 		if (auth && loading) {
 			return <LandingPage updateLoadStatus={this.updateLoadStatus} />;
 		}
+		console.log(translate("hello"));
 		const { classes, mode, error } = this.props;
 		const className = classnames(mode === 'dark' && 'dark-theme', classes.app);
 		return (
-			<div className={className}>
-				{auth && <Header refresh={this.refreshComponent} />}
-				{error && <ErrorMessage message={error} />}
-				<Router>
-					<Switch>
-						<Route
-							exact
-							path="/login"
-							render={routeprops => <Login {...routeprops} />}
-						/>
-						<Private path="/" render={routeprops => <Main {...routeprops} />} />
-					</Switch>
-				</Router>
-				{auth && <Footer />}
-			</div>
+			<I18nPropvider locale={locale}>
+				<div className={className}>
+					{auth && <Header refresh={this.refreshComponent} />}
+					{error && <ErrorMessage message={error} />}
+					<Router>
+						<Switch>
+							<Route
+								exact
+								path="/login"
+								render={routeprops => <Login {...routeprops} />}
+							/>
+							<Private path="/" render={routeprops => <Main {...routeprops} />} />
+						</Switch>
+					</Router>
+					{auth && <Footer />}
+				</div>
+			</I18nPropvider>
 		);
 	}
 }

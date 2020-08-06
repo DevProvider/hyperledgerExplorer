@@ -13,6 +13,7 @@
 		"chart.js": "^2.7.2",
 		"classnames": "^2.2.6",
 		"font-awesome": "^4.7.0",
+		"react-intl": "^5.4.5",
 		"immutable": "^3.8.1",
 		"jquery": "^3.4.0",
 		"js-beautify": "^1.7.5",
